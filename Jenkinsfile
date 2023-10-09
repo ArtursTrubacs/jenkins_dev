@@ -1,32 +1,21 @@
 pipeline {
-    agent {
-        docker {
-            // Use an official Python image
-            image 'python:3.8' // Specify the desired Python version
-        }
+  agent any
+  stages {
+    stage('Verify browsers are installed') {
+      steps {
+        sh 'google-chrome --version'
+        sh 'chromedriver --version'
+      }
     }
-    
-    stages {
-        stage('Checkout') {
-            steps {
-                // Checkout your code from Git
-                checkout scm
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                // Install Selenium and WebDriver dependencies
-                sh 'pip install selenium==3.141.0' // Specify the desired Selenium version
-                sh 'pip install webdriver_manager'
-            }
-        }
-
-        stage('Run Selenium Script') {
-            steps {
-                // Run your Selenium script
-                sh 'python3 jenkins.py'
-            }
-        }
+    stage('version') {
+      steps {
+        sh 'python3 --version'
+      }
     }
+    stage('hello') {
+      steps {
+        sh 'python3 jenkins.py'
+      }
+    }
+  }
 }
