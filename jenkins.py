@@ -1,23 +1,15 @@
 from selenium import webdriver
-import time
+from webdriver_manager.chrome import ChromeDriverManager
+ # Use Chrome as an example
 
-# Create ChromeOptions and set headless mode and window size
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument('--headless')
-chrome_options.add_argument('window-size=1920x1080')
+# Create a WebDriver instance using WebDriver Manager to manage the driver version
+driver = webdriver.Chrome(ChromeDriverManager().install())
 
-# Initialize the Selenium WebDriver with the specified options
-driver = webdriver.Chrome(options=chrome_options)
+# Open the Jenkins page
+driver.get('https://your-jenkins-url.com')  # Replace with your Jenkins URL
 
-# Open the URL
-driver.get("https://www.jenkins.io/")
-
-# Wait for 4 seconds (you can use WebDriverWait for more precise waits)
-time.sleep(4)
-
-# Get and print the title of the page
-title = driver.title
-print("Title of the page:", title)
+# Optional: Perform actions on the Jenkins page
+# ...
 
 # Close the browser
 driver.quit()
